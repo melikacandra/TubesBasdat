@@ -11,7 +11,7 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 import re
 
-df = pd.read_csv("DATASET_TA/amazon_beauty_reviews.csv")
+df = pd.read_csv("DATASET TA/amazon_beauty_reviews.csv")
 
 #product_title, review_headlines + review_body (gabung jadi 1)
 #product_id dipakai -> diedit dari 1, 2, 3, ...
