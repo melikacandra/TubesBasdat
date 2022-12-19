@@ -11,13 +11,16 @@ nltk.download('stopwords')
 from nltk.corpus import stopwords
 import re
 
-df = pd.read_csv("DATASET_TA/amazon_beauty_reviews.csv")
+df = pd.read_csv("DATASET TA/amazon_beauty_reviews.csv")
 
 df.dtypes
 #product_title, review_headlines + review_body (gabung jadi 1)
 #product_id dipakai -> diedit dari 1, 2, 3, ...
 
-#DATA CLEANING
+"""
+Data Cleaning
+
+"""
 #clean data convert object jadi string
 df['marketplace'] = df['marketplace'].astype('string')
 df['review_id'] = df['review_id'].astype('string')
@@ -36,7 +39,8 @@ df_new = df[['review_date','product_title','star_rating','review_headline', 'rev
 #pisahkan tanggal 31/08/2015
 date = df_new['review_date']
 for i in range(0,100):   
-    list_date = date[i].split('/')
+    ambil_tanggal = date[i]
+    list_date = ambil_tanggal.split('/')
     df_new['date'] = list_date[0]
     df_new['month'] = list_date[1]
     df_new['year'] = list_date[2]
@@ -78,4 +82,5 @@ df_new = df_new.rename(columns = {'product_title':'product_name','star_rating':'
 #kolom diurutkan sesuai yang diinginkan
 df_new = df_new[['date','month', 'year','product_name', 'category', 'review', 'rating', 'vote_score']]
 
-df_new.to_csv('C:/UNPAR/sem_7/Big_data/Tugas_Besar/new_beauty.csv')
+#df_new.to_csv('C:/UNPAR/sem_7/Big_data/Tugas_Besar/new_beauty.csv')
+
