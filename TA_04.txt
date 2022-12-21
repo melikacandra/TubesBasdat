@@ -1,0 +1,51 @@
+LAMPIRAN KODE TUGAS BESAR BASDAT 
+Ni Luh Melika Candra Widyani Mas (6181901065)
+Almatiara Levi Utami (6181901069)
+
+-- load data ke Hive
+LOAD DATA INPATH '/user/hive/data_tubes/new_beauty.csv'
+OVERWRITE INTO TABLE review_item
+PARTITION(product_category = 'BEAUTY');
+
+LOAD DATA INPATH '/user/hive/data_tubes/new_drug.csv'
+OVERWRITE INTO TABLE review_item
+PARTITION(product_category = 'DRUG');
+
+LOAD DATA INPATH '/user/hive/data_tubes/new_jewelry.csv'
+OVERWRITE INTO TABLE review_item
+PARTITION(product_category = 'JEWELRY');
+
+LOAD DATA INPATH '/user/hive/data_tubes/new_shoes.csv'
+OVERWRITE INTO TABLE review_item
+PARTITION(product_category = 'SHOES');
+
+LOAD DATA INPATH '/user/hive/data_tubes/new_apparel.csv'
+OVERWRITE INTO TABLE review_item
+PARTITION(product_category = 'APPAREL')
+
+-- buat database
+CREATE DATABASE IF NOT EXISTS db_reviews;
+USE db_reviews;
+
+-- buat tabel review
+CREATE TABLE review_item(
+	INDEX INT,
+	DAY STRING,
+	DATE_REVIEW INT,
+	MONTH_REVIEW INT,
+	YEAR_REVIEW INT,
+	PRODUCT_NAME STRING,
+	CATEGORY STRING,
+	REVIEW_COMMENT STRING,
+	RATING INT,
+	VOTE_SCORE INT
+)
+PARTITIONED BY (product_category STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+tblproperties ("skip.header.line.count"="1");
+
+
+-- buat folder baru di HDFS
+hadoop fs -mkdir /user/hive/data_tubes
+
