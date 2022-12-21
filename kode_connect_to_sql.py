@@ -14,5 +14,15 @@ connection = pymysql.connect(host="localhost",
 cursor = connection.cursor()
 
 cursor.execute("select * from review_table")
+review_table = cursor.fetchall()
 cursor.execute("select * from product_table")
-output = cursor.fetchall()
+product_table = cursor.fetchall()
+cursor.execute("select * from time_table")
+time_table = cursor.fetchall()
+
+
+import datetime
+dt = '21/12/2022'
+day, month, year = (int(x) for x in dt.split('/'))    
+ans = datetime.date(year, month, day)
+print (ans.strftime("%A"))
