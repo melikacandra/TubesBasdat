@@ -1,0 +1,25 @@
+KODE CLEANING
+- tubes.py -> membersihkan data amazon
+- tubes_tes.py -> membersihkan data drug
+
+
+DATA HASIL CLEANING
+- folder data_hasil_cleaning
+
+KODE MASUKKIN KE HDFS
+- input_data_update.py
+
+KODE UNTUK BENERIN FACT TABLE dan DIMENSION TABLE
+- to_fact_table_2.py
+
+KODE UNTUK CONNECT KE SQL dan DASHBOARD
+- dashboard.ipynb
+
+DATA HASIL
+- folder dashboard
+- folder fact_dimension_table
+- tubes_basdat.sql
+
+KODE HIVE
+- TA_04.txt
+
