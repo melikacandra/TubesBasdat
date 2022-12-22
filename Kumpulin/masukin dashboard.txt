@@ -1,0 +1,52 @@
+mencari rating
+select category, avg(rating) from review_item group by category
+
+jumlah produk per kategori:
+select category, count(product_name) from review_item group by category
+
+jumlah review per hari:
+select day, count(index) from review_item group by day
+
+5 item terbanyak:
+select product_name, category, vote_score from review_item order by vote_score desc limit 10
+
+ambil semua review per kategori
+select category, review_comment from review_item; 
+
+INSERT OVERWRITE DIRECTORY '/user/hive/data_tubes/day_review' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select day, count(index) from review_item group by day
+
+
+
+INSERT OVERWRITE DIRECTORY '/user/hive/data_tubes/category_review_dashboard' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select category, review_comment from review_item; 
+
+INSERT OVERWRITE DIRECTORY '/user/hive/data_tubes/average_rating' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select category, avg(rating) from review_item group by category;
+
+
+INSERT OVERWRITE DIRECTORY '/user/hive/data_tubes/product_category' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select category, count(product_name) from review_item group by category
+
+
+INSERT OVERWRITE DIRECTORY '/user/hive/data_tubes/vote_score_dashboard' ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' select product_name, category, vote_score from review_item order by vote_score desc limit 10;
+
+
+
+
+
+
+
+
+CREATE TABLE review_item(
+	INDEX INT,
+	DAY STRING,
+	DATE_REVIEW INT,
+	MONTH_REVIEW INT,
+	YEAR_REVIEW INT,
+	PRODUCT_NAME STRING,
+	CATEGORY STRING,
+	REVIEW_COMMENT STRING,
+	RATING INT,
+	VOTE_SCORE INT
+)
+PARTITIONED BY (product_category STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+tblproperties ("skip.header.line.count"="1");
